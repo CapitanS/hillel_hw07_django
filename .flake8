@@ -1,0 +1,6 @@
+[flake8]
+ignore = F401
+exclude= .git, *migrations*
+max-line-length = 119
+application-import-names = hillel_hw07_django
+import-order-style = google
