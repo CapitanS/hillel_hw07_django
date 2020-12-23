@@ -4,3 +4,5 @@ exclude= .git, *migrations*
 max-line-length = 119
 application-import-names = hillel_hw07_django
 import-order-style = google
+per-file-ignores =
+    catalog/models.py:A003
