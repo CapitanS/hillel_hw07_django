@@ -102,3 +102,14 @@ class Language(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return self.name
+
+
+class User(models.Model):
+    """Model representing an author."""
+    username = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    password = models.CharField(max_length=50)
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.username}'
