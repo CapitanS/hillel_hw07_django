@@ -105,7 +105,7 @@ class Language(models.Model):
 
 
 class User(models.Model):
-    """Model representing an author."""
+    """Model representing an user."""
     username = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     password = models.CharField(max_length=50)
