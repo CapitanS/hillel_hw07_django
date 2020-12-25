@@ -16,7 +16,7 @@ Command: `generate_users.py`
 
 Run the following command.
 ```
-python3 manage.py generate_users <numbers_of_users>
+python3 manage.py generate_users <number_of_users>
 ```
 
 ---------------------
