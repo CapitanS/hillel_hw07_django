@@ -2,3 +2,4 @@
 # 1) How to correctly create a project in pure django without subfolders?
 # 2) How correct use flake8 and travis before 'git push'?
 # 3) How correct use '# noqa'?
+# 4) Managing static files. /static/css/styles.css HTTP/1.1" why not myapp/static????
