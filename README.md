@@ -12,6 +12,8 @@ Values less than 1 and greater than 10 should cause an error.
 ---------------------
 BASE_DIR for management commands: `/catalog/management/commands/`
 
+TABLE: `catalog_user`
+
 Command: `generate_users.py`
 
 Run the following command.
