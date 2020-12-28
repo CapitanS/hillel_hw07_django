@@ -13,4 +13,5 @@
     <li><strong>'Wild' books:</strong> {{ num_wild_books }}</li>
     <li><strong>Fiction genres:</strong> {{ num_fiction_genres }}</li>
   </ul>
+  <p>You have visited this page {{ num_visits }} time{% if num_visits > 1 %}s{% endif %}.</p>
 {% endblock %}
