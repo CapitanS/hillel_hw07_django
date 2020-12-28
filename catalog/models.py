@@ -104,7 +104,7 @@ class Language(models.Model):
         return self.name
 
 
-class User(models.Model):
+class MyUser(models.Model):
     """Model representing an user."""
     username = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)

@@ -1,4 +1,4 @@
-from catalog.models import User
+from catalog.models import MyUser
 from django.core.management.base import BaseCommand, CommandError
 from faker import Faker
 from passwordgenerator import pwgenerator
@@ -34,7 +34,7 @@ class Command(BaseCommand):
             for i in range(users_number):
                 user = generate_users()
                 try:
-                    User.objects.create(username=user['username'], email=user['email'], password=user['password'])
+                    MyUser.objects.create(username=user['username'], email=user['email'], password=user['password'])
                 except Exception as err:
                     raise CommandError('Some error occurred:', str(err))
         else:
