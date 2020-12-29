@@ -6,3 +6,6 @@ application-import-names = hillel_hw07_django
 import-order-style = google
 per-file-ignores =
     catalog/models.py:A003
+    catalog/tests/test_models.py:T001
+    catalog/tests/test_forms.py:T001
+    catalog/tests/test_view.py:T001
