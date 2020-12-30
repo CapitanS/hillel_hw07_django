@@ -2,7 +2,10 @@ import datetime
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
+
+from .models import Person
 
 
 class RenewBookForm(forms.Form):
@@ -21,3 +24,16 @@ class RenewBookForm(forms.Form):
 
         # Remember to always return the cleaned data.
         return data
+
+
+# Homework 9. ModelForm for Person
+class PersonModelForm(ModelForm):
+    class Meta:
+        model = Person
+        fields = ['first_name', 'last_name', 'email', ]
+        labels = {'first_name': _('Persons first name'),
+                  'last_name': _('Persons last name'),
+                  'email': _('Persons email'), }
+        help_texts = {'first_name': _('Enter first_name.'),
+                      'last_name': _('Enter last_name.'),
+                      'email': _('Enter email.'), }

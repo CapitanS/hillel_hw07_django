@@ -124,3 +124,19 @@ class MyUser(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.username}'
+
+
+# Homework 9. Model Person
+class Person(models.Model):
+    """Model representing a Person for homework 9."""
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100, unique=True)
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.last_name}, {self.first_name}'
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular person instance."""
+        return reverse('person-detail', args=[str(self.id)])

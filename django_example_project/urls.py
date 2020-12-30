@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from catalog import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -36,4 +37,11 @@ urlpatterns += [
 # Add homework 8. Triangle view.
 urlpatterns += [
     path('triangle/', include('triangle.urls')),
+]
+
+
+# Homework 9. Add URLConf to create, view Persons
+urlpatterns += [
+    path('person/', views.person_view, name='person-create'),
+    path('person/<int:pk>/', views.person_detail, name='person-detail'),
 ]
