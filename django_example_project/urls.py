@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
 
+from catalog import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,4 +38,11 @@ urlpatterns += [
 # Add homework 8. Triangle view.
 urlpatterns += [
     path('triangle/', include('triangle.urls')),
+]
+
+
+# Homework 9. Add URLConf to create, view Persons
+urlpatterns += [
+    path('person/', views.person_view, name='person-create'),
+    path('person/<int:pk>/', views.person_detail, name='person-detail'),
 ]

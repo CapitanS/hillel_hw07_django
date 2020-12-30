@@ -1,7 +1,7 @@
 import datetime
 
 from catalog.forms import RenewBookForm
-from catalog.models import Author, Book, BookInstance, Genre
+from catalog.models import Author, Book, BookInstance, Genre, Person
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
@@ -9,6 +9,8 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, UpdateView
+
+from .forms import PersonModelForm
 
 
 # Create your views here.
@@ -162,3 +164,39 @@ class BookDelete(PermissionRequiredMixin, DeleteView):
     model = Book
     permission_required = 'catalog.can_mark_returned'
     success_url = reverse_lazy('books')
+
+
+# Homework 9. Create view for creating Person
+def person_view(request):
+    if request.method == 'POST':
+        form = PersonModelForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            form.save()
+            person = Person.objects.get(email=email)
+            return HttpResponseRedirect(person.get_absolute_url())
+    else:
+        form = PersonModelForm()
+    return render(request, 'person_form.html', {'form': form})
+
+
+# Homework 9. Create view for Person details.
+def person_detail(request, pk):
+    person_inst = get_object_or_404(Person, pk=pk)
+    # If this is a POST request then process the ModelForm data
+    if request.method == 'POST':
+        # Create a form instance and populate it with data from the request (binding):
+        form = PersonModelForm(request.POST, instance=person_inst)
+        # Check if the form is valid:
+        if form.is_valid():
+            form.save()
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('person-detail', args=[pk]))
+
+    # If this is a GET (or any other method) create the default form.
+    else:
+        form = PersonModelForm(instance=person_inst)
+
+    context = {'form': form,
+               'person_inst': person_inst}
+    return render(request, 'person_detail.html', context)
