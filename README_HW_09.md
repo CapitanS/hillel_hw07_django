@@ -19,10 +19,10 @@ BASE_DIR: `/catalog/`
 TEMPLATES_DIR: `/templates/`
 
 URLS: 
-  `/person - GET` - get the form
-  `/person - POST` - validate and save the new Person object to the database
-  `/person/<id: int> - GET` - get a form with Person data, or 404 if a user with this id does not exist
-  `/person/<id: int> - POST` - pdate Person data, or 404
+  - `/person - GET` - get the form
+  - `/person - POST` - validate and save the new Person object to the database
+  - `/person/<id: int> - GET` - get a form with Person data, or 404 if a user with this id does not exist
+  - `/person/<id: int> - POST` - pdate Person data, or 404
 
 ---------------------
 
