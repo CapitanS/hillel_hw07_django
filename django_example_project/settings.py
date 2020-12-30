@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Add our new application
     'catalog.apps.CatalogConfig',  # This object was created for us in /catalog/apps.py
+    'triangle.apps.TriangleConfig',  # This object was created for us in /triangle/apps.py
 ]
 
 MIDDLEWARE = [

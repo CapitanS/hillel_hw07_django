@@ -1,0 +1,14 @@
+{% extends "base_triangle.html" %}
+{% block title %}<title>Triangle</title>{% endblock %}
+{% block content %}
+  <h1>Triangle</h1>
+  <form action="" method="post">
+    {% csrf_token %}
+    {% if hypotenuse %}
+      <p>Hypotenuse: {{ hypotenuse }}.</p>
+    {% else %}
+      {{ form.as_p }}
+    <input type="submit" value="submit">
+    {% endif %}
+  </form>
+{% endblock %}
