@@ -32,3 +32,8 @@ urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+# Add homework 8. Triangle view.
+urlpatterns += [
+    path('triangle/', include('triangle.urls')),
+]
