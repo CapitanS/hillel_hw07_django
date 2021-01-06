@@ -140,3 +140,15 @@ class Person(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a particular person instance."""
         return reverse('person-detail', args=[str(self.id)])
+
+
+# Homework 10. Middleware for request logging
+class LogModel(models.Model):
+    """Model representing an author."""
+    path = models.CharField(max_length=100)
+    method = models.CharField(max_length=100)
+    timestamp = models.DateTimeField(auto_now=True, null=True, blank=True)
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.path}, {self.method}, {self.timestamp}'
