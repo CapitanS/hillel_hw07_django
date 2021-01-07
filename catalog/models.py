@@ -142,7 +142,7 @@ class Person(models.Model):
         return reverse('person-detail', args=[str(self.id)])
 
 
-# Homework 10. Middleware for request logging
+# Homework 10. Middleware for request logging.
 class LogModel(models.Model):
     """Model representing an author."""
     path = models.CharField(max_length=100)

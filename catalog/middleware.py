@@ -1,6 +1,7 @@
 from catalog.models import LogModel
 
 
+# Middleware for logging all requests except requests to admin part.
 class LogMiddleware(object):
     def __init__(self, get_response):
         self.get_response = get_response

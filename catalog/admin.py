@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Author, Book, BookInstance, Genre, Language
+from .models import Author, Book, BookInstance, Genre, Language, LogModel
 
 # admin.site.register(Book)
 # admin.site.register(Author)
@@ -69,3 +69,15 @@ class BookInstanceAdmin(admin.ModelAdmin):
             'fields': ('status', 'due_back', 'borrower')
         }),
     )
+
+
+# Homework 10. Define the Admin classes for LogModel
+@admin.register(LogModel)
+class LogAdmin(admin.ModelAdmin):
+    """Administration object for Log models.
+        Defines:
+         - fields to be displayed in list view (list_display)
+         - filters that will be displayed in sidebar (list_filter)
+        """
+    list_display = ('path', 'method', 'timestamp')
+    list_filter = ('path', 'method', 'timestamp')
