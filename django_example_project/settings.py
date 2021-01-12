@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Add our new application
+    'django_extensions',  # Collection of custom extensions for Django
     'catalog.apps.CatalogConfig',  # This object was created for us in /catalog/apps.py
     'triangle.apps.TriangleConfig',  # This object was created for us in /triangle/apps.py
     'orders.apps.OrdersConfig',  # This object was created for us in /orders/apps.py
-    'django_extensions',  # Collection of custom extensions for Django
 ]
 
 MIDDLEWARE = [
@@ -138,3 +138,7 @@ GRAPH_MODELS = {
     'all_applications': False,
     'group_models': True,
 }
+
+# Shell_plus
+SHELL_PLUS = 'ipython'
+SHELL_PLUS_PRINT_SQL = True
