@@ -44,8 +44,8 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='city of customer')
-    product = models.ManyToManyField(Product, verbose_name='product of customer')
+    product = models.ManyToManyField(Product, verbose_name='products of customer')
 
     def __str__(self):
-        """String for representing the product object."""
+        """String for representing the customer object."""
         return f'{self.last_name}, {self.first_name}'
