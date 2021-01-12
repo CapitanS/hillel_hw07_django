@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',  # This object was created for us in /catalog/apps.py
     'triangle.apps.TriangleConfig',  # This object was created for us in /triangle/apps.py
     'orders.apps.OrdersConfig',  # This object was created for us in /orders/apps.py
+    'django_extensions',  # Collection of custom extensions for Django
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,10 @@ STATICFILES_DIRS = [
 LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# Homework 11. Relations
+GRAPH_MODELS = {
+    'all_applications': False,
+    'group_models': True,
+}

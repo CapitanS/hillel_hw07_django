@@ -3,3 +3,8 @@
 # 2) How correct use flake8 and travis before 'git push'?
 # 3) How correct use '# noqa'?
 # 4) Managing static files. /static/css/styles.css HTTP/1.1" why not myapp/static????
+
+# 5) catalog/models.py HW_10.
+# When I deleted in 'timestamp' null (as teacher said) django told:
+# 'You are trying to change the nullable field 'timestamp' on logmodel to non-nullable without a default;
+# we can't do that (the database needs something to populate existing rows).'
