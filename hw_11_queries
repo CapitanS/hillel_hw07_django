@@ -1,0 +1,223 @@
+----
+# Instance of Customer
+----
+# Get the first customer from Customer
+person = Customer.objects.first()
+SELECT "orders_customer"."id",
+       "orders_customer"."first_name",
+       "orders_customer"."last_name",
+       "orders_customer"."city_id"
+  FROM "orders_customer"
+ ORDER BY "orders_customer"."id" ASC
+ LIMIT 1
+
+# Get city of the customer
+person.city
+SELECT "orders_city"."id",
+       "orders_city"."name"
+  FROM "orders_city"
+ WHERE "orders_city"."id" = 1
+ LIMIT 21
+
+# Get all products of the customer
+person.product.all()
+SELECT "orders_product"."id",
+       "orders_product"."name",
+       "orders_product"."price",
+       "orders_product"."date_created"
+  FROM "orders_product"
+ INNER JOIN "orders_customer_product"
+    ON ("orders_product"."id" = "orders_customer_product"."product_id")
+ WHERE "orders_customer_product"."customer_id" = 1
+ LIMIT 21
+
+# Get the supplier from city of the customer
+person.city.supplier
+SELECT "orders_city"."id",
+       "orders_city"."name"
+  FROM "orders_city"
+ WHERE "orders_city"."id" = 1
+ LIMIT 21
+Execution time: 0.000798s [Database: default]
+SELECT "orders_supplier"."id",
+       "orders_supplier"."first_name",
+       "orders_supplier"."last_name",
+       "orders_supplier"."city_id"
+  FROM "orders_supplier"
+ WHERE "orders_supplier"."city_id" = 1
+ LIMIT 21
+
+
+----
+# Instance of Product
+----
+
+# Get the first product from Product
+product = Product.objects.first()
+SELECT "orders_product"."id",
+       "orders_product"."name",
+       "orders_product"."price",
+       "orders_product"."date_created"
+  FROM "orders_product"
+ ORDER BY "orders_product"."id" ASC
+ LIMIT 1
+
+# Get set of customers of the product
+product.customer_set.all()
+SELECT "orders_customer"."id",
+       "orders_customer"."first_name",
+       "orders_customer"."last_name",
+       "orders_customer"."city_id"
+  FROM "orders_customer"
+ INNER JOIN "orders_customer_product"
+    ON ("orders_customer"."id" = "orders_customer_product"."customer_id")
+ WHERE "orders_customer_product"."product_id" = 1
+ LIMIT 21
+
+# Get the city of the first customer from set of customers of the product
+product.customer_set.all()[0].city
+SELECT "orders_customer"."id",
+       "orders_customer"."first_name",
+       "orders_customer"."last_name",
+       "orders_customer"."city_id"
+  FROM "orders_customer"
+ INNER JOIN "orders_customer_product"
+    ON ("orders_customer"."id" = "orders_customer_product"."customer_id")
+ WHERE "orders_customer_product"."product_id" = 1
+ LIMIT 1
+Execution time: 0.000643s [Database: default]
+SELECT "orders_city"."id",
+       "orders_city"."name"
+  FROM "orders_city"
+ WHERE "orders_city"."id" = 1
+ LIMIT 21
+
+# Get the supplier from the city of the customer
+product.customer_set.all()[0].city.supplier
+SELECT "orders_customer"."id",
+       "orders_customer"."first_name",
+       "orders_customer"."last_name",
+       "orders_customer"."city_id"
+  FROM "orders_customer"
+ INNER JOIN "orders_customer_product"
+    ON ("orders_customer"."id" = "orders_customer_product"."customer_id")
+ WHERE "orders_customer_product"."product_id" = 1
+ LIMIT 1
+Execution time: 0.000875s [Database: default]
+SELECT "orders_city"."id",
+       "orders_city"."name"
+  FROM "orders_city"
+ WHERE "orders_city"."id" = 1
+ LIMIT 21
+Execution time: 0.000083s [Database: default]
+SELECT "orders_supplier"."id",
+       "orders_supplier"."first_name",
+       "orders_supplier"."last_name",
+       "orders_supplier"."city_id"
+  FROM "orders_supplier"
+ WHERE "orders_supplier"."city_id" = 1
+ LIMIT 21
+
+----
+# Instance of City
+----
+
+# Get the first city from City
+city = City.objects.first()
+SELECT "orders_city"."id",
+       "orders_city"."name"
+  FROM "orders_city"
+ ORDER BY "orders_city"."id" ASC
+ LIMIT 1
+
+# Get the supplier from the city
+city.supplier
+SELECT "orders_supplier"."id",
+       "orders_supplier"."first_name",
+       "orders_supplier"."last_name",
+       "orders_supplier"."city_id"
+  FROM "orders_supplier"
+ WHERE "orders_supplier"."city_id" = 1
+ LIMIT 21
+
+# Get the customers from the city
+city.customer_set.all()
+SELECT "orders_customer"."id",
+       "orders_customer"."first_name",
+       "orders_customer"."last_name",
+       "orders_customer"."city_id"
+  FROM "orders_customer"
+ WHERE "orders_customer"."city_id" = 1
+ LIMIT 21
+
+# Get the products of the customer from the city
+city.customer_set.all()[0].product.all()
+SELECT "orders_customer"."id",
+       "orders_customer"."first_name",
+       "orders_customer"."last_name",
+       "orders_customer"."city_id"
+  FROM "orders_customer"
+ WHERE "orders_customer"."city_id" = 1
+ LIMIT 1
+Execution time: 0.000540s [Database: default]
+SELECT "orders_product"."id",
+       "orders_product"."name",
+       "orders_product"."price",
+       "orders_product"."date_created"
+  FROM "orders_product"
+ INNER JOIN "orders_customer_product"
+    ON ("orders_product"."id" = "orders_customer_product"."product_id")
+ WHERE "orders_customer_product"."customer_id" = 1
+ LIMIT 21
+
+----
+# Instance of Supplier
+----
+
+# Get the first supplier from Supplier
+supplier = Supplier.objects.first()
+SELECT "orders_supplier"."id",
+       "orders_supplier"."first_name",
+       "orders_supplier"."last_name",
+       "orders_supplier"."city_id"
+  FROM "orders_supplier"
+ ORDER BY "orders_supplier"."id" ASC
+ LIMIT 1
+
+# Get the city of the supplier
+supplier.city
+SELECT "orders_city"."id",
+       "orders_city"."name"
+  FROM "orders_city"
+ WHERE "orders_city"."id" = 1
+ LIMIT 21
+
+# Get the customers from the city of the supplier
+supplier.city.customer_set.all()
+Out[38]: SELECT "orders_customer"."id",
+       "orders_customer"."first_name",
+       "orders_customer"."last_name",
+       "orders_customer"."city_id"
+  FROM "orders_customer"
+ WHERE "orders_customer"."city_id" = 1
+ LIMIT 21
+
+# Get the products of the first customer from the city of the supplier
+supplier.city.customer_set.all()[0].product.all()
+SELECT "orders_customer"."id",
+       "orders_customer"."first_name",
+       "orders_customer"."last_name",
+       "orders_customer"."city_id"
+  FROM "orders_customer"
+ WHERE "orders_customer"."city_id" = 1
+ LIMIT 1
+Execution time: 0.000577s [Database: default]
+SELECT "orders_product"."id",
+       "orders_product"."name",
+       "orders_product"."price",
+       "orders_product"."date_created"
+  FROM "orders_product"
+ INNER JOIN "orders_customer_product"
+    ON ("orders_product"."id" = "orders_customer_product"."product_id")
+ WHERE "orders_customer_product"."customer_id" = 1
+ LIMIT 21

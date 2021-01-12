@@ -8,3 +8,7 @@
 # When I deleted in 'timestamp' null (as teacher said) django told:
 # 'You are trying to change the nullable field 'timestamp' on logmodel to non-nullable without a default;
 # we can't do that (the database needs something to populate existing rows).'
+
+# 6) hw_11_queries HW_11.
+# Ex.: product.customer_set.all()[0].city.supplier
+# Can we in one quire do not use [0] and get query set of all cities?
