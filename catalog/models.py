@@ -147,7 +147,7 @@ class LogModel(models.Model):
     """Model representing an author."""
     path = models.CharField(max_length=100)
     method = models.CharField(max_length=100)
-    timestamp = models.DateTimeField(auto_now=True, null=True, blank=True)
+    timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         """String for representing the Model object."""

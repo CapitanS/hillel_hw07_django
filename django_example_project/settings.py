@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Add our new application
     'catalog.apps.CatalogConfig',  # This object was created for us in /catalog/apps.py
     'triangle.apps.TriangleConfig',  # This object was created for us in /triangle/apps.py
+    'orders.apps.OrdersConfig',  # This object was created for us in /orders/apps.py
 ]
 
 MIDDLEWARE = [
