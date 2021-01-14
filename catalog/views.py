@@ -10,7 +10,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, UpdateView
 
-from .forms import PersonModelForm
+from .forms import PersonModelForm, CustomForm
 
 
 # Create your views here.
@@ -200,3 +200,9 @@ def person_detail(request, pk):
     context = {'form': form,
                'person_inst': person_inst}
     return render(request, 'person_detail.html', context)
+
+
+# Test json forms
+def some_view(request):
+    form = CustomForm()
+    return render(request, 'some_html.html', {'form': form})

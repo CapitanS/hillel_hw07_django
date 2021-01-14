@@ -34,3 +34,9 @@ urlpatterns += [
     path('book/<int:pk>/update/', views.BookUpdate.as_view(), name='book-update'),
     path('book/<int:pk>/delete/', views.BookDelete.as_view(), name='book-delete'),
 ]
+
+
+# Test json forms
+urlpatterns += [
+    path('some_view', views.some_view, name='some_view'),
+]
