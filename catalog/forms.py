@@ -42,66 +42,68 @@ class PersonModelForm(ModelForm):
 
 # Test json forms
 schema = {
-    "title": "Person",
+    "title": "Объект",
     "type": "object",
     "required": [
       "name",
-      "age",
-      "date",
-      "favorite_color",
-      "gender",
+      "customer",
+      "description",
       "location",
-      "pets"
+      "equipments",
+      "mechanisms"
     ],
     "properties": {
       "name": {
         "type": "string",
-        "description": "First and Last name",
+        "title": "Название объекта",
+        "description": "Как назвать?",
         "minLength": 4,
-        "default": "Jeremy Dorn"
+        "default": "Элеватор"
       },
-      "age": {
-        "type": "integer",
-        "default": 25,
-        "minimum": 18,
-        "maximum": 99
-      },
-      "favorite_color": {
+      "customer": {
         "type": "string",
-        "format": "color",
-        "title": "favorite color",
-        "default": "#ffa500"
-      },
-      "gender": {
-        "type": "string",
+        "title": "Заказчик",
         "enum": [
-          "male",
-          "female",
+          "АгроСоюз",
+          "Kernel",
           "other"
         ]
       },
-      "date": {
+      "description": {
         "type": "string",
-        "format": "date",
-        "options": {
-          "flatpickr": {}
-        }
+        "title": "Примечание",
+        "format": "textarea"
       },
       "location": {
         "type": "object",
-        "title": "Location",
+        "title": "Расположение",
+        "format": "grid-strict",
         "properties": {
           "city": {
             "type": "string",
-            "default": "San Francisco"
+            "title": "Город/село",
+            "options": {
+              "grid_columns": 3
+            },
+            "default": "Волочийск"
           },
           "state": {
             "type": "string",
-            "default": "CA"
+            "title": "Область",
+            "enum": [
+              "Хмельницкая обл.",
+              "Харьковская обл.",
+              "other"
+            ],
+            "options": {
+              "grid_columns": 3
+            },
+            "default": "Хмельницкая обл."
           },
           "citystate": {
             "type": "string",
-            "description": "This is generated automatically from the previous two fields",
+            "title": "Адрес",
+            "description": "автоматически генерируется из двух",
             "template": "{{city}}, {{state}}",
             "watch": {
               "city": "location.city",
@@ -110,42 +112,184 @@ schema = {
           }
         }
       },
-      "pets": {
+      "equipments": {
+        "type": "object",
+        "title": "Требования",
+        "format": "grid-strict",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "title": "Производитель",
+            "options": {
+              "grid_columns": 2
+            },
+            "enum": [
+              "Schneider Electric",
+              "Siemens",
+              "other"
+            ],
+            "default": "Schneider Electric"
+          },
+          "rack": {
+            "type": "string",
+            "title": "Конструктив",
+            "options": {
+              "grid_columns": 2
+            },
+            "enum": [
+              "Контур",
+              "Rittal",
+              "other"
+            ],
+            "default": "Контур"
+          },
+          "bus": {
+            "type": "string",
+            "title": "Шина",
+            "options": {
+              "grid_columns": 2
+            },
+            "enum": [
+              "Медь",
+              "Алюминий",
+              "other"
+            ],
+            "default": "Медь"
+          }
+        }
+      },
+      "mechanisms": {
         "type": "array",
-        "format": "table",
-        "title": "Pets",
+        "format": "tabs",
+        "title": "Механизмы",
         "items": {
           "type": "object",
-          "title": "Pet",
+          "title": "Механизм",
+          "format": "grid-strict",
+          "required": [
+            "type",
+            "work",
+            "power",
+            "number"
+          ],
           "properties": {
             "type": {
               "type": "string",
+              "title": "Тип механизма",
+              "options": {
+                "grid_columns": 3
+              },
               "enum": [
-                "cat",
-                "dog",
-                "bird",
-                "reptile",
+                "Нория",
+                "Транспортер",
+                "Клапан",
+                "Задвижка",
                 "other"
               ],
-              "default": "dog"
+              "default": "Нория"
             },
             "name": {
-              "type": "string"
+              "type": "string",
+              "title": "Название",
+              "options": {
+                "grid_columns": 2
+              }
+            },
+            "work": {
+              "type": "string",
+              "title": "Тип пуска",
+              "enum": [
+                "Прямой",
+                "ПП",
+                "ПЧ",
+                "Каскад",
+                "Реверс",
+                "other"
+              ],
+              "default": "Прямой"
+            },
+            "power": {
+              "type": "number",
+              "title": "Pн",
+              "options": {
+                "grid_columns": 2
+              },
+              "default": 15
+            },
+            "number": {
+              "type": "number",
+              "title": "Шт.",
+              "options": {
+                "grid_columns": 1
+              },
+              "default": 1
+            },
+            "di": {
+              "type": "number",
+              "title": "DI",
+              "options": {
+                "grid_columns": 1
+              },
+              "default": 6
+            },
+            "do": {
+              "type": "number",
+              "title": "DO",
+              "options": {
+                "grid_columns": 1
+              },
+              "default": 1
+            },
+            "ai": {
+              "type": "number",
+              "title": "AI",
+              "options": {
+                "grid_columns": 1
+              },
+              "default": 0
+            },
+            "ao": {
+              "type": "number",
+              "title": "AO",
+              "options": {
+                "grid_columns": 1
+              },
+              "default": 0
+            },
+            "interface": {
+              "type": "string",
+              "title": "Интерфейс",
+              "enum": [
+                "Modbus/RS-485",
+                "Modbus/TCP-IP",
+                "Profinet",
+                "Profibus",
+                "other"
+              ],
+              "default": "Modbus/RS-485"
             }
           }
         },
         "default": [
           {
-            "type": "dog",
-            "name": "Walter"
+            "type": "Нория",
+            "work": "Прямой",
+            "power": 15,
+            "number": 1,
+            "di": 6,
+            "do": 1,
+            "ai": 0,
+            "ao": 0,
+            "interface": "Modbus/RS-485"
           }
         ]
       }
     }
   }
+
 options = {
     "theme": "bootstrap4",
-    "iconlib": "bootstrap4",
+    "iconlib": "fontawesome5",
     "object_layout": "grid",
     "template": "default",
     "show_errors": "interaction",
@@ -158,7 +302,7 @@ options = {
     "ajaxCredentials": 0,
     "show_opt_in": 0,
     "disable_edit_json": 1,
-    "disable_collapse": 1,
+    "disable_collapse": 0,
     "disable_properties": 1,
     "disable_array_add": 0,
     "disable_array_reorder": 0,
