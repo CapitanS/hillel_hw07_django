@@ -152,3 +152,28 @@ class LogModel(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.path}, {self.method}, {self.timestamp}'
+
+
+# Test. Json forms.
+class UtilizationRate(models.Model):
+    """Model representing an utilization rate for mechanisms."""
+    type = models.CharField(max_length=400)
+    rate = models.FloatField(db_column='Ki')
+    cosf = models.FloatField(db_column='COSf')
+
+    def __str__(self):
+        """String for representing the Model object."""
+        return f'{self.type}, {self.rate}'
+
+
+class ObjectsTable(models.Model):
+    """Model representing an object for some calculation"""
+    name = models.CharField(max_length=200, null=True)
+    object_info = models.JSONField(db_column='Information')
+    customer = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=1000, null=True)
+    timestamp = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        """String for representing the object."""
+        return f'{self.name}, {self.customer}, {self.description}'

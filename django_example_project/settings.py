@@ -143,3 +143,7 @@ GRAPH_MODELS = {
 # Shell_plus
 SHELL_PLUS = 'ipython'
 SHELL_PLUS_PRINT_SQL = True
+
+
+# Jsonforms
+JSONFORMS_SCHEMA_DIR = BASE_DIR / 'schema'

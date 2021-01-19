@@ -10,7 +10,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, UpdateView
 
-from .forms import PersonModelForm, CustomForm
+from .forms import CustomForm, PersonModelForm, options
 
 
 # Create your views here.
@@ -201,8 +201,44 @@ def person_detail(request, pk):
                'person_inst': person_inst}
     return render(request, 'person_detail.html', context)
 
+from pprint import pprint
+
 
 # Test json forms
 def some_view(request):
-    form = CustomForm()
+    if request.method == 'POST':
+        form = request.POST.get('field')
+        pprint(eval(form))
+        pprint(type(eval(form)))
+    else:
+        options['startval'] = {
+            "name": "Элеватор 111",
+            "customer": "Kernel",
+            "description": "",
+            "location": {
+                "city": "Волочийск",
+                "state": "Хмельницкая обл.",
+                "citystate": "Волочийск, Хмельницкая обл."
+                },
+            "equipments": {
+                "provider": "Schneider Electric",
+                "rack": "Контур",
+                "bus": "Медь"
+                },
+            "mechanisms": [
+                {
+                    "type": "Нория",
+                    "name": "",
+                    "work": "Прямой",
+                    "power": 15,
+                    "number": 1,
+                    "di": 6,
+                    "do": 1,
+                    "ai": 0,
+                    "ao": 0,
+                    "interface": "Modbus/RS-485"
+                }
+            ]
+        }
+        form = CustomForm()
     return render(request, 'some_html.html', {'form': form})
