@@ -23,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", 'b+9qqhwn^apm_a#u&(m@+%ydw+jio-pm2t6eoh^v&581od!5_3')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+]
 
 # Application definition
 
@@ -41,7 +44,14 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',  # This object was created for us in /catalog/apps.py
     'triangle.apps.TriangleConfig',  # This object was created for us in /triangle/apps.py
     'orders.apps.OrdersConfig',  # This object was created for us in /orders/apps.py
+
 ]
+
+if DEBUG:
+    INSTALLED_APPS += [
+        'debug_toolbar',    # Debug Toolbar
+        'silk',  # This object was created for silk
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +64,13 @@ MIDDLEWARE = [
     # Middleware for logging requests.
     'catalog.middleware.LogMiddleware',
 ]
+
+
+if DEBUG:
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',  # Middleware for Debug Toolbar
+        'silk.middleware.SilkyMiddleware',  # Middleware for profiling and inspection tool.
+    ]
 
 ROOT_URLCONF = 'django_example_project.urls'
 
@@ -142,3 +159,18 @@ GRAPH_MODELS = {
 # Shell_plus
 SHELL_PLUS = 'ipython'
 SHELL_PLUS_PRINT_SQL = True
+
+# HW_12.
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+SILKY_AUTHENTICATION = True  # User must login
+SILKY_AUTHORISATION = True  # User must have permissions
+
+
+def my_custom_perms(user):
+    return user.is_superuser
+
+
+SILKY_PERMISSIONS = my_custom_perms

@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from catalog import views
+import debug_toolbar
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -45,3 +46,10 @@ urlpatterns += [
     path('person/', views.person_view, name='person-create'),
     path('person/<int:pk>/', views.person_detail, name='person-detail'),
 ]
+
+# Homework 12.
+if settings.DEBUG:
+    urlpatterns += [
+        path('__debug__', include(debug_toolbar.urls)),  # Add Debug Tollbar's URLconf
+        path('silk/', include('silk.urls', namespace='silk')),  # Add Silk's URLconf
+    ]
