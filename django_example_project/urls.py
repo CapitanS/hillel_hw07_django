@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import debug_toolbar
 from catalog import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -45,3 +46,11 @@ urlpatterns += [
     path('person/', views.person_view, name='person-create'),
     path('person/<int:pk>/', views.person_detail, name='person-detail'),
 ]
+
+# Homework 12.
+if settings.DEBUG:
+    urlpatterns += [
+        path('__debug__', include(debug_toolbar.urls)),  # Add Debug Tollbar's URLconf
+        path('silk/', include('silk.urls', namespace='silk')),  # Add Silk's URLconf
+    ]
+
