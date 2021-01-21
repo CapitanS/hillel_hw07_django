@@ -168,12 +168,18 @@ class UtilizationRate(models.Model):
 
 class ObjectsTable(models.Model):
     """Model representing an object for some calculation"""
-    name = models.CharField(max_length=200, null=True)
-    object_info = models.JSONField(db_column='Information')
-    customer = models.CharField(max_length=200, null=True)
-    description = models.CharField(max_length=1000, null=True)
-    timestamp = models.DateTimeField(auto_now=True, null=True)
+    name = models.CharField(max_length=200)
+    object_type = models.CharField(max_length=200)
+    object_info = models.TextField(db_column='Information')
+    customer = models.CharField(max_length=200)
+    description = models.CharField(max_length=1000)
+    data_add = models.DateTimeField(auto_now_add=True, null=True)
+    data_update = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         """String for representing the object."""
-        return f'{self.name}, {self.customer}, {self.description}'
+        return f'{self.name}, {self.customer}, {self.object_type}'
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular person instance."""
+        return reverse('order_view', args=[str(self.id)])

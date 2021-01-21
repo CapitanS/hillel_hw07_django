@@ -39,4 +39,5 @@ urlpatterns += [
 # Test json forms
 urlpatterns += [
     path('some_view', views.some_view, name='some_view'),
+    path('some_view/<int:pk>/', views.order_view, name='order_view'),
 ]

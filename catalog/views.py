@@ -1,7 +1,7 @@
 import datetime
 
 from catalog.forms import RenewBookForm
-from catalog.models import Author, Book, BookInstance, Genre, Person
+from catalog.models import Author, Book, BookInstance, Genre, ObjectsTable, Person
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
@@ -10,7 +10,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, UpdateView
 
-from .forms import CustomForm, PersonModelForm, options
+from .forms import CustomForm, options, PersonModelForm
 
 
 # Create your views here.
@@ -201,44 +201,52 @@ def person_detail(request, pk):
                'person_inst': person_inst}
     return render(request, 'person_detail.html', context)
 
-from pprint import pprint
-
 
 # Test json forms
 def some_view(request):
     if request.method == 'POST':
-        form = request.POST.get('field')
-        pprint(eval(form))
-        pprint(type(eval(form)))
+        form_information = request.POST.get('field')
+        object_info = eval(form_information)
+        name = object_info['name']
+        object_type = object_info['object_type']
+        customer = object_info['customer']
+        description = object_info['description']
+        in_base_object = ObjectsTable.objects.create(
+            name=name,
+            object_type=object_type,
+            object_info=object_info,
+            customer=customer,
+            description=description
+        )
+        in_base_object.save()
+        return HttpResponseRedirect(in_base_object.get_absolute_url())
     else:
-        options['startval'] = {
-            "name": "Элеватор 111",
-            "customer": "Kernel",
-            "description": "",
-            "location": {
-                "city": "Волочийск",
-                "state": "Хмельницкая обл.",
-                "citystate": "Волочийск, Хмельницкая обл."
-                },
-            "equipments": {
-                "provider": "Schneider Electric",
-                "rack": "Контур",
-                "bus": "Медь"
-                },
-            "mechanisms": [
-                {
-                    "type": "Нория",
-                    "name": "",
-                    "work": "Прямой",
-                    "power": 15,
-                    "number": 1,
-                    "di": 6,
-                    "do": 1,
-                    "ai": 0,
-                    "ao": 0,
-                    "interface": "Modbus/RS-485"
-                }
-            ]
-        }
+        # options['startval'] = None
         form = CustomForm()
     return render(request, 'some_html.html', {'form': form})
+
+
+def order_view(request, pk):
+    object_inst = get_object_or_404(ObjectsTable, pk=pk)
+    if request.method == 'POST':
+        form_information = request.POST.get('field')
+        object_info = eval(form_information)
+        name = object_info['name']
+        object_type = object_info['object_type']
+        customer = object_info['customer']
+        description = object_info['description']
+        ObjectsTable.objects.filter(pk=pk).update(
+            name=name,
+            object_type=object_type,
+            object_info=object_info,
+            customer=customer,
+            description=description
+        )
+        e = ObjectsTable.objects.get(pk=pk)
+        e.save()
+        return HttpResponseRedirect(reverse('order_view', args=[pk]))
+    else:
+        options['startval'] = None
+        options['startval'] = eval(object_inst.object_info)
+        form = CustomForm()
+    return render(request, 'some_order_html.html', {'form': form})
