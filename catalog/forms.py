@@ -6,7 +6,7 @@ from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 from django_jsonforms.forms import JSONSchemaField
 
-from .models import ObjectsTable, Person
+from .models import Person
 
 
 class RenewBookForm(forms.Form):
@@ -62,16 +62,3 @@ schema = 'schema/schema.json'
 class CustomForm(forms.Form):
 
     field = JSONSchemaField(schema=schema, options=options)
-
-
-# class ObjectsModelForm(ModelForm):
-#     class Meta:
-#         model = ObjectsTable
-#         fields = [
-#             'name',
-#             'object_info',
-#             'customer',
-#             'description',
-#             'data_add',
-#             'data_update',
-#         ]
