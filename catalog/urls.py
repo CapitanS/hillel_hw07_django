@@ -34,3 +34,9 @@ urlpatterns += [
     path('book/<int:pk>/update/', views.BookUpdate.as_view(), name='book-update'),
     path('book/<int:pk>/delete/', views.BookDelete.as_view(), name='book-delete'),
 ]
+
+# Homework 13. Celery.
+# Add URLConf to send email with Celery
+urlpatterns += [
+    path('send_email/', views.send_email, name='send-email'),
+]

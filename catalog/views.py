@@ -1,16 +1,17 @@
-import datetime
+from datetime import datetime, timedelta
 
 from catalog.forms import RenewBookForm
 from catalog.models import Author, Book, BookInstance, Genre, Person
+from catalog.tasks import send_email_with_reminder
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, UpdateView
 
-from .forms import PersonModelForm
+from .forms import PersonModelForm, SendEmailModelForm
 
 
 # Create your views here.
@@ -200,3 +201,24 @@ def person_detail(request, pk):
     context = {'form': form,
                'person_inst': person_inst}
     return render(request, 'person_detail.html', context)
+
+
+# Homework 13. Celery
+def send_email(request):
+    if request.method == 'POST':
+        form = SendEmailModelForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            email = form.cleaned_data['email']
+            time_sending = form.cleaned_data['time_sending']
+            now = datetime.now()
+            in_two_days = timedelta(days=2)
+            less_two_days = time_sending - now
+            if time_sending < now or time_sending > in_two_days:
+                return render(request, 'send_email_correct.html', {'form': form})
+            else:
+                send_email_with_reminder.apply_async((text, email), countdown=less_two_days)
+                return HttpResponse(f'Remind in {less_two_days}')
+    else:
+        form = SendEmailModelForm()
+    return render(request, 'send_email.html', {'form': form})

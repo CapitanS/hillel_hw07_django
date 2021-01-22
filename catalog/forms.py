@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Person
+from .models import Person, SendEmail
 
 
 class RenewBookForm(forms.Form):
@@ -37,3 +37,21 @@ class PersonModelForm(ModelForm):
         help_texts = {'first_name': _('Enter first_name.'),
                       'last_name': _('Enter last_name.'),
                       'email': _('Enter email.'), }
+
+
+# Homework 13. ModelForm for Person
+class SendEmailModelForm(ModelForm):
+    class Meta:
+        model = SendEmail
+        fields = ['text', 'time_sending', 'email', ]
+        labels = {'text': _('Reminder'),
+                  'time_sending': _('Time'),
+                  'email': _('Email'),
+                  }
+        help_texts = {'text': _('Your reminder.'),
+                      'time_sending': _('When remind?'),
+                      'email': _('Email for reminding.'),
+                      }
+        widgets = {
+            'time_sending': forms.DateTimeInput(format=('%Y-%m-%d %H:%M:%S')),
+        }

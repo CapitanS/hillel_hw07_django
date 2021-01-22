@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',  # This object was created for us in /catalog/apps.py
     'triangle.apps.TriangleConfig',  # This object was created for us in /triangle/apps.py
     'orders.apps.OrdersConfig',  # This object was created for us in /orders/apps.py
-
+    'django_celery_results',  # for celery
 ]
 
 if DEBUG:
@@ -149,7 +149,6 @@ LOGIN_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
 # Homework 11. Relations
 GRAPH_MODELS = {
     'all_applications': False,
@@ -174,3 +173,10 @@ def my_custom_perms(user):
 
 
 SILKY_PERMISSIONS = my_custom_perms
+
+
+# Homework 13. Celery config
+# Celery Configuration Options
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_TRACK_STARTED = True
+CELERY_RESULT_BACKEND = 'django-db'
