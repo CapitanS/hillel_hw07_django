@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from catalog.forms import RenewBookForm
 from catalog.models import Author, Book, BookInstance, Genre, Person
@@ -211,14 +211,12 @@ def send_email(request):
             text = form.cleaned_data['text']
             email = form.cleaned_data['email']
             time_sending = form.cleaned_data['time_sending']
-            now = datetime.now()
-            in_two_days = timedelta(days=2)
-            less_two_days = time_sending - now
-            if time_sending < now or time_sending > in_two_days:
+            now = datetime.now(timezone.utc)
+            if time_sending < now or time_sending > now + timedelta(days=2):
                 return render(request, 'send_email_correct.html', {'form': form})
             else:
-                send_email_with_reminder.apply_async((text, email), countdown=less_two_days)
-                return HttpResponse(f'Remind in {less_two_days}')
+                send_email_with_reminder.apply_async((text, email), eta=time_sending)
+                return HttpResponse(f'Wait for {time_sending}')
     else:
         form = SendEmailModelForm()
     return render(request, 'send_email.html', {'form': form})

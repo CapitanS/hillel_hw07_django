@@ -8,5 +8,6 @@ def send_email_with_reminder(text, email):
         subject='Reminder',
         message=text,
         from_email=email,
+        recipient_list=['bla@bla.com'],
         fail_silently=False,
     )

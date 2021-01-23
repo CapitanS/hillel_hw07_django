@@ -152,15 +152,3 @@ class LogModel(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return f'{self.path}, {self.method}, {self.timestamp}'
-
-
-# Homework 13. Celery. Send email
-class SendEmail(models.Model):
-    """Model representing sending email for homework 13."""
-    text = models.TextField()
-    time_sending = models.DateTimeField()
-    email = models.EmailField(max_length=254, unique=True)
-
-    def __str__(self):
-        """String for representing the Model object."""
-        return f'{self.text}'
