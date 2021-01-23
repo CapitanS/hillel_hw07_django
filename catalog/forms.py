@@ -37,3 +37,12 @@ class PersonModelForm(ModelForm):
         help_texts = {'first_name': _('Enter first_name.'),
                       'last_name': _('Enter last_name.'),
                       'email': _('Enter email.'), }
+
+
+# Homework 13. ModelForm for Person
+class SendEmailModelForm(forms.Form):
+
+    text = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), label='Enter the reminder')
+    time_sending = forms.DateTimeField(widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD HH:MM'}),
+                                       label='Enter the time for reminding')
+    email = forms.EmailField(label='Enter the email for sending the reminder')
