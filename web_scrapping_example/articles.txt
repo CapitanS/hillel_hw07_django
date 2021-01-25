@@ -1,0 +1,30 @@
+{'title': 'Pip has dropped support for Python 2', 'link': 'https://pip.pypa.io/en/stable/news/#id1', 'published': 'Sun, 24 Jan 2021 02:01:43 +0000'}
+{'title': 'Turn any device with a web browser to a second screen for your computer', 'link': 'https://github.com/pavlobu/deskreen', 'published': 'Sun, 24 Jan 2021 12:23:33 +0000'}
+{'title': 'The “Nonplussed” Problem (2011)', 'link': 'http://www.slate.com/articles/life/the_good_word/2011/04/the_nonplussed_problem.html', 'published': 'Fri, 22 Jan 2021 09:57:19 +0000'}
+{'title': 'Show HN: Full text search Project Gutenberg (60m paragraphs)', 'link': 'https://gutensearch.com/', 'published': 'Sun, 24 Jan 2021 04:58:18 +0000'}
+{'title': 'SoftBank’s plan to sell Arm to NVIDIA is hitting antitrust wall around the world', 'link': 'https://asia.nikkei.com/Business/Technology/SoftBank-s-plan-to-sell-Arm-to-NVIDIA-is-hitting-antitrust-wall-around-the-world', 'published': 'Sun, 24 Jan 2021 09:36:19 +0000'}
+{'title': 'I bought 200 Raspberry Pi Model B’s and I’m going to fix them', 'link': 'https://blog.jmdawson.co.uk/i-bought-200-raspberry-pi-model-bs-and-im-going-to-fix-them-part-1/', 'published': 'Sat, 23 Jan 2021 19:36:55 +0000'}
+{'title': 'Why Working from Home Will Stick [pdf]', 'link': 'https://nbloom.people.stanford.edu/sites/g/files/sbiybj4746/f/why_wfh_stick1_0.pdf', 'published': 'Sat, 23 Jan 2021 15:04:16 +0000'}
+{'title': 'How long does a bottle of wine last after it is opened?', 'link': 'https://www.vinography.com/2020/12/how-long-does-a-bottle-of-wine-last-after-it-is-opened', 'published': 'Sat, 23 Jan 2021 23:38:17 +0000'}
+{'title': 'Mary Catherine Bateson Dies at 81; Anthropologist on Lives of Women', 'link': 'https://www.nytimes.com/2021/01/14/books/mary-catherine-bateson-dead.html', 'published': 'Fri, 22 Jan 2021 20:48:42 +0000'}
+{'title': 'Is it better to use cat, dd, pv or another procedure to copy a CD/DVD?', 'link': 'https://unix.stackexchange.com/questions/224277/is-it-better-to-use-cat-dd-pv-or-another-procedure-to-copy-a-cd-dvd/224314#224314', 'published': 'Sat, 23 Jan 2021 07:29:14 +0000'}
+{'title': 'Forever chemicals are widespread in U.S. drinking water', 'link': 'https://www.scientificamerican.com/article/forever-chemicals-are-widespread-in-u-s-drinking-water/', 'published': 'Sun, 24 Jan 2021 00:03:56 +0000'}
+{'title': 'Making Win32 APIs More Accessible to More Languages', 'link': 'https://blogs.windows.com/windowsdeveloper/2021/01/21/making-win32-apis-more-accessible-to-more-languages/', 'published': 'Fri, 22 Jan 2021 07:10:58 +0000'}
+{'title': 'Software engineering topics I changed my mind on', 'link': 'https://chriskiehl.com/article/thoughts-after-6-years', 'published': 'Sun, 24 Jan 2021 00:02:48 +0000'}
+{'title': 'Show HN: Filmulator – a streamlined, open-source raw photo editor', 'link': 'https://filmulator.org/v0-11-0/', 'published': 'Sat, 23 Jan 2021 20:30:53 +0000'}
+{'title': 'Whitehouse.gov Chooses WordPress, Again', 'link': 'https://pagely.com/blog/whitehouse-gov-chooses-wordpress-again/', 'published': 'Sun, 24 Jan 2021 00:50:13 +0000'}
+{'title': 'Godiva Chocolates to close all 128 North American stores due to Covid pandemic', 'link': 'https://abc13.com/godiva-chocolates-closing-stores/9941539', 'published': 'Sun, 24 Jan 2021 10:19:51 +0000'}
+{'title': 'Move to EU to avoid Brexit costs, firms told', 'link': 'https://www.theguardian.com/politics/2021/jan/23/brexit-hit-firms-advised-government-officials-set-up-shop-in-eu', 'published': 'Sun, 24 Jan 2021 11:02:26 +0000'}
+{'title': 'Tree – a lib for working with nested data structures, open-sourced by deepmind', 'link': 'https://github.com/deepmind/tree', 'published': 'Sat, 23 Jan 2021 22:19:52 +0000'}
+{'title': '(YC W14) Is Hiring a Software Engineer (Remote) – TypeScript or Python/Spark', 'link': 'https://jobs.42.engineering', 'published': 'Sun, 24 Jan 2021 07:01:13 +0000'}
+{'title': 'Baffling Brexit rules threaten export chaos', 'link': 'https://www.theguardian.com/politics/2021/jan/10/baffling-brexit-rules-threaten-export-chaos-gove-is-warned', 'published': 'Sun, 24 Jan 2021 12:22:21 +0000'}
+{'title': 'The People the Suburbs Were Built for Are Gone', 'link': 'https://www.vice.com/en/article/y3gx5b/the-people-the-suburbs-were-built-for-are-gone', 'published': 'Fri, 22 Jan 2021 11:33:03 +0000'}
+{'title': 'Site.js: Small Web construction set', 'link': 'https://sitejs.org/', 'published': 'Sat, 23 Jan 2021 21:54:22 +0000'}
+{'title': 'TLB and Pagewalk Coherence in x86 Processors (2015)', 'link': 'https://blog.stuffedcow.net/2015/08/pagewalk-coherence/', 'published': 'Thu, 21 Jan 2021 00:50:25 +0000'}
+{'title': 'Game Design Perspective: Stardew Valley (2020)', 'link': 'https://www.pixelatedplaygrounds.com/sidequests/game-design-perspective-stardew-valley', 'published': 'Fri, 22 Jan 2021 19:39:56 +0000'}
+{'title': 'Replicating GPT-2 at Home', 'link': 'https://bkkaggle.github.io/blog/algpt2/2020/07/17/ALGPT2-part-2.html', 'published': 'Sat, 23 Jan 2021 16:52:22 +0000'}
+{'title': 'Emails a browser extension developer gets from scammers', 'link': 'https://sponsor.ajay.app/emails/', 'published': 'Sat, 23 Jan 2021 17:37:46 +0000'}
+{'title': 'Flipper Zero Manufacturing and Shipping Plan', 'link': 'https://blog.flipperzero.one/review-and-producing-plan/', 'published': 'Fri, 22 Jan 2021 10:16:42 +0000'}
+{'title': 'DrScheme in Space', 'link': 'https://parentheticallyspeaking.org/articles/drscheme-in-space/', 'published': 'Sat, 23 Jan 2021 19:47:25 +0000'}
+{'title': 'MkLinux', 'link': 'https://mklinux.org/', 'published': 'Sat, 23 Jan 2021 22:59:23 +0000'}
+{'title': 'Why am I wasting time on EndBASIC?', 'link': 'https://jmmv.dev/2021/01/why-endbasic.html', 'published': 'Sat, 23 Jan 2021 18:31:52 +0000'}
