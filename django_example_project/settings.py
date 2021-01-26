@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',  # This object was created for us in /catalog/apps.py
     'triangle.apps.TriangleConfig',  # This object was created for us in /triangle/apps.py
     'orders.apps.OrdersConfig',  # This object was created for us in /orders/apps.py
+    'scraping.apps.ScrapingConfig',  # This object was created for us in /scraping/apps.py
     'django_celery_results',  # for celery
 ]
 

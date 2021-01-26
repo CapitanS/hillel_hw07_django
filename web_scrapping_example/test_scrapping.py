@@ -29,6 +29,9 @@ for page in range(1, number_of_pages+1):
         quotes = soup.findAll('div', class_='quote')
         for quote in quotes:
             text = quote.find('span', class_='text').text
+            author_url_end = quote.find('small', class_='author').find_next_sibling('a').get('href')
+            author_url = f'https://quotes.toscrape.com/{author_url_end}'
+
             number_of_quotes_at_once -= 1
             if number_of_quotes_at_once == 0:
                 break
