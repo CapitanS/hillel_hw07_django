@@ -1,13 +1,12 @@
 from django.core.mail import send_mail
-from django_example_project.celery import app
+from celery import shared_task
 
 
-@app.task
+@shared_task
 def send_email_with_reminder(text, email):
     send_mail(
         subject='Reminder',
         message=text,
-        from_email=email,
-        recipient_list=['bla@bla.com'],
-        fail_silently=False,
+        from_email='server@server.com',
+        recipient_list=[email]
     )

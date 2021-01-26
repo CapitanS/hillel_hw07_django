@@ -174,6 +174,7 @@ def person_view(request):
         if form.is_valid():
             email = form.cleaned_data['email']
             form.save()
+            # person = form.save()
             person = Person.objects.get(email=email)
             return HttpResponseRedirect(person.get_absolute_url())
     else:
@@ -211,12 +212,8 @@ def send_email(request):
             text = form.cleaned_data['text']
             email = form.cleaned_data['email']
             time_sending = form.cleaned_data['time_sending']
-            now = datetime.now(timezone.utc)
-            if time_sending < now or time_sending > now + timedelta(days=2):
-                return render(request, 'send_email_correct.html', {'form': form})
-            else:
-                send_email_with_reminder.apply_async((text, email), eta=time_sending)
-                return HttpResponse(f'Wait for {time_sending}')
+            send_email_with_reminder.apply_async((text, email), eta=time_sending)
+            return HttpResponse(f'Wait for {time_sending}')
     else:
         form = SendEmailModelForm()
     return render(request, 'send_email.html', {'form': form})
