@@ -1,30 +1,12 @@
-from celery import Celery
-
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
-from celery.schedules import crontab
 from .models import Authors, Quotes
 from django.core.mail import send_mail
-
-app = Celery('tasks')
-
-
-# scheduled task execution
-app.conf.beat_schedule = {
-    # executes every 1 minute
-    # 'scraping-task-one-min': {
-    #     'task': 'tasks.hackernews_rss',
-    #     'schedule': crontab()
-    # }
-    'scraping-every-10-seconds': {
-        'task': 'tasks.scraping_quotes',
-        'schedule': 10.0
-    }
-}
+from celery import shared_task
+import lxml
 
 
-@app.task
+@shared_task()
 def scraping_quotes():
     number_of_pages = 1
 
@@ -53,9 +35,6 @@ def scraping_quotes():
                 text = quote.find('span', class_='text').text
                 if not Quotes.objects.filter(text=text).exists():
                     author_of_quote = quote.find('small', class_='author').text
-                    quote = Quotes.create(text=text, author=author_of_quote)
-                    quote.save()
-                    number_of_quotes_at_once -= 1
                     author_url_end = quote.find('small', class_='author').find_next_sibling('a').get('href')
                     author_url = f'https://quotes.toscrape.com/{author_url_end}'
                     author_r = requests.get(author_url)
@@ -66,21 +45,22 @@ def scraping_quotes():
                         author_born_date = author_block.find('span', class_='author-born-date').text
                         author_born_location = author_block.find('span', class_='author-born-location').text
                         author_description = author_block.find('div', class_='author-description').text
-                        author_detail = {
-                            'author_title': author_title,
-                            'author_born_date': author_born_date,
-                            'author_born_location': author_born_location,
-                            'author_description': author_description
-                        }
-                        author = Authors.objects.create(author_detail)
+                        author = Authors.objects.create(author_title=author_title,
+                                                        author_born_date=author_born_date,
+                                                        author_born_location=author_born_location,
+                                                        author_description=author_description)
                         author.save()
+                    quote = Quotes.objects.create(text=text, author=Authors.objects.get(author_title=author_title))
+                    quote.save()
+                    number_of_quotes_at_once -= 1
+
                 if number_of_quotes_at_once == 0:
                     break
                 if number_of_quotes_at_once != 0 and page == number_of_pages and quote == quotes[-1]:
                     send_email_with_message()
 
 
-@app.task
+@shared_task()
 def send_email_with_message():
     send_mail(
         subject='About quotes',
