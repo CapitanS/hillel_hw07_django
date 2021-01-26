@@ -42,7 +42,8 @@ class PersonModelForm(ModelForm):
 # Homework 13. ModelForm for Person
 class SendEmailModelForm(forms.Form):
     text = forms.CharField(required=True, widget=forms.Textarea(attrs={'rows': 3}), label='Enter the reminder')
-    time_sending = forms.DateTimeField(required=True, widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD HH:MM'}),
+    time_sending = forms.DateTimeField(required=True,
+                                       widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD HH:MM'}),
                                        label='Enter the time for reminding',
                                        input_formats={'2021-01-26 19:30'})
     email = forms.EmailField(required=True, label='Enter the email for sending the reminder')
