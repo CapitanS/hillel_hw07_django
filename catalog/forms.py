@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime, timedelta, timezone
 
 from django import forms
 from django.core.exceptions import ValidationError
@@ -41,8 +41,23 @@ class PersonModelForm(ModelForm):
 
 # Homework 13. ModelForm for Person
 class SendEmailModelForm(forms.Form):
+    text = forms.CharField(required=True, widget=forms.Textarea(attrs={'rows': 3}), label='Enter the reminder')
+    time_sending = forms.DateTimeField(required=True,
+                                       widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD HH:MM'}),
+                                       label='Enter the time for reminding',
+                                       input_formats={'2021-01-26 19:30'})
+    email = forms.EmailField(required=True, label='Enter the email for sending the reminder')
 
-    text = forms.CharField(widget=forms.Textarea(attrs={'rows': 3}), label='Enter the reminder')
-    time_sending = forms.DateTimeField(widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD HH:MM'}),
-                                       label='Enter the time for reminding')
-    email = forms.EmailField(label='Enter the email for sending the reminder')
+    # Rewrite method 'clean_' for checking 'time_sending'
+    def clean_time_sending(self):
+        time = self.cleaned_data['time_sending']
+
+        # Checking that the 'time_sending' is not in the past
+        if time < datetime.now(timezone.utc):
+            raise forms.ValidationError(_("Invalid time - It can't be at the past!"))
+
+        # Checking that the 'time_sending' is not more than 2 days in advance
+        if time > datetime.now(timezone.utc) + timedelta(days=2):
+            raise forms.ValidationError(_("Invalid time - It can't be more than 2 days in advance!"))
+
+        return time
