@@ -1,6 +1,7 @@
 import os
 
 from celery import Celery
+from celery.schedules import crontab  # scheduler
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_example_project.settings')
@@ -15,3 +16,12 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
+
+# scheduled task execution
+app.conf.beat_schedule = {
+    # executes every odd hour
+    'scraping-task-odd-hour': {
+        'task': 'scraping.tasks.scraping_quotes',
+        'schedule': crontab(hour='1-23/2')
+    }
+}
