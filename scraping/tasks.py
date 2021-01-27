@@ -1,9 +1,11 @@
-import requests
 from bs4 import BeautifulSoup
-from .models import Authors, Quotes
-from django.core.mail import send_mail
 from celery import shared_task
+from django.core.mail import send_mail
 import lxml
+import requests
+
+
+from .models import Authors, Quotes
 
 
 @shared_task()
@@ -24,7 +26,7 @@ def scraping_quotes():
 
     number_of_quotes_at_once = 5
 
-    for page in range(1, number_of_pages+1):
+    for page in range(1, number_of_pages + 1):
         if number_of_quotes_at_once == 0:
             break
         else:
@@ -34,7 +36,6 @@ def scraping_quotes():
             for quote in quotes:
                 text = quote.find('span', class_='text').text
                 if not Quotes.objects.filter(text=text).exists():
-                    author_of_quote = quote.find('small', class_='author').text
                     author_url_end = quote.find('small', class_='author').find_next_sibling('a').get('href')
                     author_url = f'https://quotes.toscrape.com/{author_url_end}'
                     author_r = requests.get(author_url)
@@ -65,7 +66,6 @@ def send_email_with_message():
     send_mail(
         subject='About quotes',
         message='Fin de la comedie',
-        from_email='my@email.com',
-        recipient_list=['bla@bla.com'],
-        fail_silently=False,
+        from_email='admin@admin.com',
+        recipient_list=['bla@bla.com']
     )
