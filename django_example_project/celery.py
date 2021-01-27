@@ -19,8 +19,8 @@ app.autodiscover_tasks()
 
 # scheduled task execution
 app.conf.beat_schedule = {
-    # executes every other hour
-    'scraping-task-other-hour': {
+    # executes every odd hour
+    'scraping-task-odd-hour': {
         'task': 'scraping.tasks.scraping_quotes',
         'schedule': crontab(hour='1-23/2')
     }
