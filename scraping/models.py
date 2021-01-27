@@ -12,6 +12,7 @@ class Quotes(models.Model):
 
     class Meta:
         ordering = ['author']
+        verbose_name_plural = 'Quotes'
 
 
 class Authors(models.Model):
@@ -22,7 +23,8 @@ class Authors(models.Model):
 
     def __str__(self):
         """String for representing the Authors object."""
-        return f'{self.author_title}, {self.author_description}'
+        return f'{self.author_title}'
 
     class Meta:
         ordering = ['author_title', 'author_description']
+        verbose_name_plural = 'Authors'

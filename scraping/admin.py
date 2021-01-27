@@ -21,6 +21,7 @@ class AuthorsAdmin(admin.ModelAdmin):
     list_display = ('author_title', 'author_born_date', 'author_born_location', 'author_description')
     fields = ['author_title', ('author_born_date', 'author_born_location'), 'author_description']
     inlines = [QuotesInline]
+    list_per_page = 10
 
 
 # Define the Admin classes for Quotes
@@ -31,3 +32,5 @@ class QuotesAdmin(admin.ModelAdmin):
          - fields to be displayed in list view (list_display)
         """
     list_display = ('text', 'author',)
+    list_filter = ('author',)
+    list_per_page = 10
