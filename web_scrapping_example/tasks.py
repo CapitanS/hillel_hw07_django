@@ -1,10 +1,11 @@
-from celery import Celery
-
-import requests
-from bs4 import BeautifulSoup
 from datetime import datetime
-from celery.schedules import crontab
 import json
+
+from bs4 import BeautifulSoup
+from celery import Celery
+from celery.schedules import crontab
+import requests
+
 
 app = Celery('tasks')
 
@@ -59,7 +60,7 @@ def hackernews_rss():
                 'published': published,
                 'created_at': str(datetime.now()),
                 'source': 'HackerNews RSS'
-                }
+            }
 
             # append my 'article_list' with each 'article' object
             article_list.append(article)
@@ -67,5 +68,5 @@ def hackernews_rss():
         # after the loop, dump my saved objects into a .txt file
         return save_function(article_list)
     except Exception as e:
-        print('The scraping job failed. See exception: ')
-        print(e)
+        print('The scraping job failed. See exception: ')  # noqa: T001
+        print(e)  # noqa: T001

@@ -1,6 +1,6 @@
 # library imports omitted
-import requests
 from bs4 import BeautifulSoup
+import requests
 
 number_of_pages = 1
 
@@ -16,11 +16,11 @@ while True:
     else:
         break
 
-print(number_of_pages)
+print(number_of_pages)  # noqa: T001
 
 number_of_quotes_at_once = 5
 
-for page in range(1, number_of_pages+1):
+for page in range(1, number_of_pages + 1):
     if number_of_quotes_at_once == 0:
         break
     else:
@@ -36,4 +36,4 @@ for page in range(1, number_of_pages+1):
             if number_of_quotes_at_once == 0:
                 break
             if number_of_quotes_at_once != 0 and page == number_of_pages and quote == quotes[-1]:
-                print(text)
+                print(text)  # noqa: T001
