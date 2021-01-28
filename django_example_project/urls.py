@@ -53,3 +53,9 @@ if settings.DEBUG:
         path('__debug__', include(debug_toolbar.urls)),  # Add Debug Tollbar's URLconf
         path('silk/', include('silk.urls', namespace='silk')),  # Add Silk's URLconf
     ]
+
+
+# Homework 15. Class based views and pagination.
+urlpatterns += [
+    path('orders/', include('orders.urls')),
+]
