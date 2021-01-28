@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
 
 from catalog.forms import RenewBookForm
 from catalog.models import Author, Book, BookInstance, Genre, Person
@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, UpdateView
@@ -215,6 +215,7 @@ def send_email(request):
             time_sending = form.cleaned_data['time_sending']
             send_email_with_reminder.apply_async((text, email), eta=time_sending)
             messages.success(request, f'{email} will be get this Reminder at {time_sending}!')
+            return redirect('send-email')
     else:
         form = SendEmailModelForm()
     return render(request, 'catalog/send_email.html', {'form': form})
