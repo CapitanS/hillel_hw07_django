@@ -1,8 +1,9 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Person
@@ -45,7 +46,7 @@ class SendEmailModelForm(forms.Form):
     time_sending = forms.DateTimeField(required=True,
                                        widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD HH:MM'}),
                                        label='Enter the time for reminding',
-                                       input_formats={'2021-01-26 19:30'})
+                                       input_formats={'%Y-%m-%D %H:%M'})
     email = forms.EmailField(required=True, label='Enter the email for sending the reminder')
 
     # Rewrite method 'clean_' for checking 'time_sending'
@@ -53,11 +54,11 @@ class SendEmailModelForm(forms.Form):
         time = self.cleaned_data['time_sending']
 
         # Checking that the 'time_sending' is not in the past
-        if time < datetime.now(timezone.utc):
+        if time < timezone.now():
             raise forms.ValidationError(_("Invalid time - It can't be at the past!"))
 
         # Checking that the 'time_sending' is not more than 2 days in advance
-        if time > datetime.now(timezone.utc) + timedelta(days=2):
+        if time > timezone.now() + timedelta(days=2):
             raise forms.ValidationError(_("Invalid time - It can't be more than 2 days in advance!"))
 
         return time
