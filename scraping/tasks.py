@@ -70,10 +70,11 @@ def scraping_quotes():
                                                         author_born_date=author_born_date,
                                                         author_born_location=author_born_location,
                                                         author_description=author_description)
-                        author.save()
+                    else:
+                        author = Authors.objects.get(author_title=author_title)
 
                     # Add quote in our base and save.
-                    quote = Quotes.objects.create(text=text, author=Authors.objects.get(author_title=author_title))
+                    quote = Quotes.objects.create(text=text, author=author.author_title)
                     quote.save()
 
                     # Decrease number of quotes at once by 1
@@ -85,7 +86,7 @@ def scraping_quotes():
 
                 # If there are no new quotes - send message
                 if number_of_quotes_at_once != 0 and page == number_of_pages and quote == quotes[-1]:
-                    send_email_with_message()
+                    send_email_with_message.delay()
 
 
 @shared_task()
