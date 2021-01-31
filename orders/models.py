@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse  # Used to generate URLs by reversing the URL patterns
 
 
 # Homework 11. Relations.
@@ -19,6 +20,10 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     date_created = models.DateTimeField(auto_now=True, null=True)
+
+    def get_absolute_url(self):
+        """Returns the url to access a particular product instance."""
+        return reverse('product-detail', args=[str(self.id)])
 
     def __str__(self):
         return self.name
