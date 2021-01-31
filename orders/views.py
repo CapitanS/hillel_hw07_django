@@ -24,7 +24,7 @@ class ProductCreate(LoginRequiredMixin, CreateView):
 
 class ProductUpdate(LoginRequiredMixin, UpdateView):
     model = Product
-    fields = '__all__'  # Not recommended (potential security issue if more fields added)
+    fields = ['name', 'price']
 
 
 class ProductDelete(LoginRequiredMixin, DeleteView):

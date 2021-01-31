@@ -1,0 +1,1 @@
+[{"model": "orders.customer", "pk": 1, "fields": {"first_name": "Maks", "last_name": "Fomenko", "city": 1, "product": []}}, {"model": "orders.customer", "pk": 2, "fields": {"first_name": "Paul", "last_name": "Radis", "city": 4, "product": []}}]

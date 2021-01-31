@@ -181,3 +181,9 @@ SILKY_PERMISSIONS = my_custom_perms
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_RESULT_BACKEND = 'django-db'
+
+
+# Homework 16. BASE_DIR for fixtures
+FIXTURE_DIRS = [
+    BASE_DIR / 'fixtures',
+]
