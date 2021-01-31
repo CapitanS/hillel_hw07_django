@@ -1,0 +1,13 @@
+{% extends "products_base_generic.html" %}
+
+{% block content %}
+  <h1>Product: {{ product }}</h1>
+
+  <p><strong>Price: {{ product.price }} $</strong></p>
+  <ul>
+    <li><a href="{% url 'product-update' product.pk %}">Product Update</a></li>
+    <li><a href="{% url 'product-delete' product.pk %}">Product Delete</a></li>
+  </ul>
+
+
+{% endblock %}
