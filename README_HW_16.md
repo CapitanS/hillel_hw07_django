@@ -1,4 +1,4 @@
-# Homework_16. Class based views and pagination.
+# Homework_16. Django redis cache, templates tags and filters.
 
 Homework for hillel IT school. 
 Based on [MDN tutorial](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Tutorial_local_library_website)
