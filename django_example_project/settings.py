@@ -181,3 +181,22 @@ SILKY_PERMISSIONS = my_custom_perms
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_TASK_TRACK_STARTED = True
 CELERY_RESULT_BACKEND = 'django-db'
+
+
+# Homework 16. BASE_DIR for fixtures
+FIXTURE_DIRS = [
+    BASE_DIR / 'fixtures',
+]
+
+
+# Homework 16. CACHES for redis
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient'
+        },
+        'KEY_PREFIX': 'django_example_project'
+    }
+}

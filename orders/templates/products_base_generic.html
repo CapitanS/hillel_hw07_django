@@ -17,6 +17,7 @@
         <ul class="sidebar-nav">
             <li><a href="{% url 'products' %}">All products</a></li>
             <li><a href="{% url 'product-create' %}">Create product</a></li>
+            <li><a href="{% url 'customer-order-price' %}">Orders price</a></li>
         </ul>
         <ul class="sidebar-nav">
             {% if user.is_authenticated %}

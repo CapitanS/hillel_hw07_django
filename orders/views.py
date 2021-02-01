@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import FloatField, Sum
 from django.urls import reverse_lazy
 from django.views import generic
-from django.views.generic import CreateView, DeleteView, UpdateView
-from orders.models import Product
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from orders.models import Customer, Product
 
 
 # Create your views here.
@@ -24,9 +25,17 @@ class ProductCreate(LoginRequiredMixin, CreateView):
 
 class ProductUpdate(LoginRequiredMixin, UpdateView):
     model = Product
-    fields = '__all__'  # Not recommended (potential security issue if more fields added)
+    fields = ['name', 'price']
 
 
 class ProductDelete(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('products')
+
+
+class CustomerPriceListView(ListView):
+    model = Customer
+    template_name = 'orders/customers_price_list.html'
+    context_object_name = 'customers'
+    paginate_by = 100
+    queryset = Customer.objects.all().annotate(order_price=Sum('product__price', output_field=FloatField()))
