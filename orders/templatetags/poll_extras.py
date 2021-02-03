@@ -1,6 +1,8 @@
 from django import template
+from django.core.cache import cache
 from django.db.models import FloatField, Sum
 from orders.models import Customer
+import requests
 
 from ..forms import CityModelForm
 
@@ -48,3 +50,20 @@ def city_form(request):
     context = {'form': form,
                'text': text}
     return context
+
+
+@register.filter
+def check_forbidden_words(word):
+    """
+    Takes some word and check if it in the list of the forbidden words
+    """
+    # Checks if list of forbidden words in the cache
+    forbidden_words = cache.get('forbidden_words')
+    if forbidden_words is None:
+        # Gets the list of forbidden words
+        forbidden_words = requests.get('https://random-word-api.herokuapp.com/word?number=100').text
+        cache.set('forbidden_words', forbidden_words, 30)
+    # Checks if our word in forbidden list of worlds
+    if word in forbidden_words:
+        word.replace(word, '*' * len(word))
+    return word

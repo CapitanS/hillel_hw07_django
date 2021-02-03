@@ -21,8 +21,8 @@
   <tbody>
     {% for customer in customers %}
       <tr>
-        <td>{{ customer.first_name }}</td>
-        <td>{{ customer.last_name }}</td>
+        <td>{{ customer.first_name|check_forbidden_words }}</td>
+        <td>{{ customer.last_name|check_forbidden_words }}</td>
         <td>{{ customer.order_price|floatformat:2|currency }}</td>
       </tr>
     {% endfor %}
