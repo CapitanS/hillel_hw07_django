@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import FloatField, Sum
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
@@ -39,3 +40,7 @@ class CustomerPriceListView(ListView):
     context_object_name = 'customers'
     paginate_by = 100
     queryset = Customer.objects.all().annotate(order_price=Sum('product__price', output_field=FloatField()))
+
+
+def city_create(request):
+    return render(request, 'city_index.html')

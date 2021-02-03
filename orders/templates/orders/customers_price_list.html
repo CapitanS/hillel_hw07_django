@@ -1,7 +1,16 @@
 {% extends "products_base_generic.html" %}
-
+{% load poll_extras %}
 {% block content %}
+
+<p></p>
+<p></p>
+{% total_price as price %}
+<p>The total price: {{ price|floatformat:2|currency }}</p>
+<p></p>
+<p></p>
+
 <table class="table table-bordered">
+  <caption style="caption-side:top;">Table of customers</caption>
   <thead>
     <tr>
       <th>First name</th>
@@ -12,9 +21,9 @@
   <tbody>
     {% for customer in customers %}
       <tr>
-        <td>{{ customer.first_name }}</td>
-        <td>{{ customer.last_name }}</td>
-        <td>{{ customer.order_price }}</td>
+        <td>{{ customer.first_name|check_forbidden_words }}</td>
+        <td>{{ customer.last_name|check_forbidden_words }}</td>
+        <td>{{ customer.order_price|floatformat:2|currency }}</td>
       </tr>
     {% endfor %}
   </tbody>
