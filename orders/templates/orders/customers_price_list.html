@@ -1,8 +1,14 @@
 {% extends "products_base_generic.html" %}
 {% load poll_extras %}
 {% block content %}
+
+<p></p>
+<p></p>
 {% total_price as price %}
 <p>The total price: {{ price|floatformat:2|currency }}</p>
+<p></p>
+<p></p>
+
 <table class="table table-bordered">
   <caption style="caption-side:top;">Table of customers</caption>
   <thead>
