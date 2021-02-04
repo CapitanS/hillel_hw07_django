@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from orders.forms import CityModelForm
 from orders.models import Customer, Product
 
 
@@ -43,4 +44,18 @@ class CustomerPriceListView(ListView):
 
 
 def city_create(request):
-    return render(request, 'city_index.html')
+    if request.method == 'POST':
+        form = CityModelForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            form.save()
+            text = f'You added {name}. Create new one.'
+            form = CityModelForm()
+
+    else:
+        form = CityModelForm()
+        text = 'Enter new city'
+
+    context = {'form': form,
+               'text': text}
+    return render(request, 'city_index.html', {'context': context})

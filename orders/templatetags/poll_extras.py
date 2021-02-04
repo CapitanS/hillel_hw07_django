@@ -33,25 +33,6 @@ def total_price() -> float:
 
 
 # Homework 17. Extra
-@register.inclusion_tag('city_form.html')
-def city_form(request):
-    if request.method == 'POST':
-        form = CityModelForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            form.save()
-            text = f'You added {name}. Create new one.'
-            form = CityModelForm()
-
-    else:
-        form = CityModelForm()
-        text = 'Enter new city'
-
-    context = {'form': form,
-               'text': text}
-    return context
-
-
 @register.filter
 def check_forbidden_words(word):
     """
@@ -67,3 +48,8 @@ def check_forbidden_words(word):
     if word in forbidden_words:
         word.replace(word, '*' * len(word))
     return word
+
+
+@register.inclusion_tag('city_form.html')
+def city_form(form):
+    return form
