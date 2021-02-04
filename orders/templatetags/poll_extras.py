@@ -4,8 +4,6 @@ from django.db.models import FloatField, Sum
 from orders.models import Customer
 import requests
 
-from ..forms import CityModelForm
-
 
 register = template.Library()
 
