@@ -6,13 +6,13 @@ from catalog.tasks import send_email_with_reminder
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, UpdateView
 
-from .forms import PersonModelForm, SendEmailModelForm
+from .forms import ContactForm, PersonModelForm, SendEmailModelForm
 
 
 # Create your views here.
@@ -219,3 +219,17 @@ def send_email(request):
     else:
         form = SendEmailModelForm()
     return render(request, 'catalog/send_email.html', {'form': form})
+
+
+# Homework 19.
+def contact_page(request):
+    form = ContactForm()
+    return render(request, 'contact.html', {'contactForm': form})
+
+
+def post_contact(request):
+    if request.method == 'POST' and request.is_ajax():
+        form = ContactForm(request.POST)
+        form.save()
+        return JsonResponse({'success': True}, status=200)
+    return JsonResponse({'success': False}, status=400)

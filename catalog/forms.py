@@ -6,7 +6,7 @@ from django.forms import ModelForm
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from .models import Person
+from .models import Contact, Person
 
 
 class RenewBookForm(forms.Form):
@@ -62,3 +62,20 @@ class SendEmailModelForm(forms.Form):
             raise forms.ValidationError(_("Invalid time - It can't be more than 2 days in advance!"))
 
         return time
+
+
+# Homework 19.
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        exclude = ['timestamp', ]
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 4, 'cols': 15}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(ContactForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+            })
