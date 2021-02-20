@@ -10,3 +10,13 @@ def send_email_with_reminder(text, email):
         from_email='server@server.com',
         recipient_list=[email]
     )
+
+
+@shared_task
+def send_email_to_admin(message, email, name):
+    send_mail(
+        subject=f'Information from {name}',
+        message=message,
+        from_email=f'{email}',
+        recipient_list=['admin@admin.com']
+    )

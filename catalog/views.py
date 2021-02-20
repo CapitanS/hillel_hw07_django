@@ -2,17 +2,18 @@ from datetime import datetime
 
 from catalog.forms import RenewBookForm
 from catalog.models import Author, Book, BookInstance, Genre, Person
-from catalog.tasks import send_email_with_reminder
+from catalog.tasks import send_email_to_admin, send_email_with_reminder
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import CreateView, DeleteView, UpdateView
 
-from .forms import PersonModelForm, SendEmailModelForm
+from .forms import ContactForm, PersonModelForm, SendEmailModelForm
 
 
 # Create your views here.
@@ -219,3 +220,30 @@ def send_email(request):
     else:
         form = SendEmailModelForm()
     return render(request, 'catalog/send_email.html', {'form': form})
+
+
+# Homework 19.
+def contact_page(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+    else:
+        form = ContactForm()
+    return send_message_form(request, form, 'includes/partial_contact_form_create.html')
+
+
+def send_message_form(request, form, template_name):
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            message = form.cleaned_data['message']
+            email = form.cleaned_data['email']
+            name = form.cleaned_data['name']
+            send_email_to_admin.apply_async((message, email, name))
+            data['form_is_valid'] = True
+            data['html_contact_send'] = render_to_string('includes/partial_contact_send.html')
+        else:
+            data['form_is_valid'] = False
+    context = {'form': form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)

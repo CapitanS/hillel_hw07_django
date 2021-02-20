@@ -40,3 +40,8 @@ urlpatterns += [
 urlpatterns += [
     path('send_email/', views.send_email, name='send-email'),
 ]
+
+# Homework 19
+urlpatterns += [
+    path('contact/', views.contact_page, name='contact'),
+]
