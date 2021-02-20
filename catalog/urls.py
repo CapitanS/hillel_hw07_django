@@ -43,6 +43,5 @@ urlpatterns += [
 
 # Homework 19
 urlpatterns += [
-    path('ajax/contact', views.post_contact, name='contact-submit'),
-    path('contact/', views.contact_page),
+    path('contact/', views.contact_page, name='contact'),
 ]

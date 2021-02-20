@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',  # This object was created for us in /orders/apps.py
     'scraping.apps.ScrapingConfig',  # This object was created for us in /scraping/apps.py
     'django_celery_results',  # for celery
+    'widget_tweaks',  # for templates Hw_19
 ]
 
 if DEBUG:
