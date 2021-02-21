@@ -16,11 +16,14 @@ click-plugins==1.1.1
 click-repl==0.1.6
 decorator==4.4.2
 Django==3.1.4
+django-bootstrap-modal-forms==2.0.1
 django-celery-results==2.0.1
 django-debug-toolbar==3.2
 django-extensions==3.1.0
 django-jsonforms==1.1.2
+django-redis==4.12.1
 django-silk==4.1.0
+django-widget-tweaks==1.4.8
 Faker==5.0.2
 flake8==3.8.4
 flake8-builtins==1.5.3
@@ -45,6 +48,7 @@ passwordgenerator==1.4
 pathspec==0.8.1
 pexpect==4.8.0
 pickleshare==0.7.5
+pkg-resources==0.0.0
 prompt-toolkit==3.0.10
 ptpython==3.0.9
 ptyprocess==0.7.0
@@ -56,6 +60,7 @@ pyparsing==2.4.7
 pyrsistent==0.17.3
 python-dateutil==2.8.1
 pytz==2020.4
+redis==3.5.3
 regex==2020.11.13
 requests==2.25.1
 six==1.15.0
