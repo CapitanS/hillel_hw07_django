@@ -36,7 +36,18 @@
             <li><a href="{% url 'books' %}">All books</a></li>
             <li><a href="{% url 'authors' %}">All authors</a></li>
         </ul>
-
+        <hr />
+        <ul class="sidebar-nav">
+            <li>
+                <button type="button"
+                        class="btn btn-primary js-send-message"
+                        data-toggle="modal"
+                        data-url="{% url 'contact' %}">
+                            Contact Form
+                </button>
+            </li>
+        </ul>
+        <hr />
         <ul class="sidebar-nav">
             {% if user.is_authenticated %}
             <li>User: {{ user.get_username }}</li>
@@ -59,16 +70,7 @@
             <li><a href="{% url 'person-create' %}">Person</a></li>
         </ul>
         <hr />
-        <ul class="sidebar-nav">
-            <li>
-                <button type="button"
-                        class="btn btn-primary js-send-message"
-                        data-toggle="modal"
-                        data-url="{% url 'contact' %}">
-                            Contact Form
-                </button>
-            </li>
-        </ul>
+
         {% endif %}
         {% endblock %}
       </div>
